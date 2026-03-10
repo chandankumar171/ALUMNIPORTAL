@@ -1,0 +1,253 @@
+/* ============================================
+   BRANCHES PAGE - DARK TECH AESTHETIC
+   Matches Welcome.css & Auth.css theme
+   ============================================ */
+
+.branches-page {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #050812 0%, #0a0e1f 50%, #050812 100%);
+  color: #e0e7ff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.branches-page::before {
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image:
+    linear-gradient(0deg, transparent 24%, rgba(34, 211, 238, 0.04) 25%, rgba(34, 211, 238, 0.04) 26%, transparent 27%, transparent 74%, rgba(34, 211, 238, 0.04) 75%, rgba(34, 211, 238, 0.04) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(34, 211, 238, 0.04) 25%, rgba(34, 211, 238, 0.04) 26%, transparent 27%, transparent 74%, rgba(34, 211, 238, 0.04) 75%, rgba(34, 211, 238, 0.04) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+
+.branches-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 2rem 5rem;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.branches-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+  animation: fade-in-up 0.6s ease-out;
+}
+
+.branches-header h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: #f1f5f9;
+  margin-bottom: 0.3rem;
+}
+
+.branches-header h2 span {
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.branches-header p {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   GRID
+   ============================================ */
+
+.branches-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  animation: fade-in-up 0.8s ease-out;
+}
+
+/* ============================================
+   BRANCH CARD
+   ============================================ */
+
+.branch-card {
+  background: linear-gradient(135deg, rgba(8, 10, 25, 0.85) 0%, rgba(6, 50, 60, 0.4) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  animation: fade-in-up 0.6s ease-out both;
+}
+
+.branch-card:nth-child(1) { animation-delay: 0.05s; }
+.branch-card:nth-child(2) { animation-delay: 0.10s; }
+.branch-card:nth-child(3) { animation-delay: 0.15s; }
+.branch-card:nth-child(4) { animation-delay: 0.20s; }
+.branch-card:nth-child(5) { animation-delay: 0.25s; }
+.branch-card:nth-child(6) { animation-delay: 0.30s; }
+
+.branch-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.07) 50%, transparent 100%);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.branch-card:hover::before {
+  left: 100%;
+}
+
+.branch-card:hover {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 35px rgba(34, 211, 238, 0.2), inset 0 0 30px rgba(34, 211, 238, 0.05);
+  transform: translateY(-6px);
+}
+
+/* ============================================
+   CARD CONTENT
+   ============================================ */
+
+.branch-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  animation: bounce 3s ease-in-out infinite;
+}
+
+.branch-card:nth-child(2) .branch-icon { animation-delay: 0.2s; }
+.branch-card:nth-child(3) .branch-icon { animation-delay: 0.4s; }
+.branch-card:nth-child(4) .branch-icon { animation-delay: 0.6s; }
+.branch-card:nth-child(5) .branch-icon { animation-delay: 0.8s; }
+.branch-card:nth-child(6) .branch-icon { animation-delay: 1.0s; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.branch-card h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.4rem;
+}
+
+.branch-card p {
+  color: #64748b;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.branch-card-arrow {
+  display: inline-block;
+  margin-top: 1.2rem;
+  color: rgba(34, 211, 238, 0.5);
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.branch-card:hover .branch-card-arrow {
+  color: #22d3ee;
+  transform: translateX(5px);
+}
+
+/* ============================================
+   GLOW BORDER ANIMATION
+   ============================================ */
+
+.branch-card-glow {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 1rem;
+  border: 1px solid rgba(34, 211, 238, 0);
+  animation: glow-border 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.branch-card:nth-child(odd) .branch-card-glow {
+  animation-delay: 1s;
+}
+
+@keyframes glow-border {
+  0%, 100% { border-color: rgba(34, 211, 238, 0); box-shadow: none; }
+  50%       { border-color: rgba(34, 211, 238, 0.3); box-shadow: 0 0 20px rgba(34, 211, 238, 0.1); }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 900px) {
+  .branches-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .branches-container {
+    padding: 1.5rem 1rem 5rem;
+    padding-top: 4.5rem;
+  }
+
+  .branches-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .branches-container {
+    padding: 1rem 0.75rem 5rem;
+    padding-top: 4.5rem;
+  }
+
+  .branches-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  .branch-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .branch-icon {
+    font-size: 2rem;
+  }
+
+  .branch-card h3 {
+    font-size: 1.2rem;
+  }
+}

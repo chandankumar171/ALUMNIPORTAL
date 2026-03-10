@@ -1,0 +1,301 @@
+/* ============================================
+   POST JOB PAGE - DARK TECH AESTHETIC
+   Matches Welcome.css & Auth.css theme
+   ============================================ */
+
+.postjob-page {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #050812 0%, #0a0e1f 50%, #050812 100%);
+  color: #e0e7ff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.postjob-page::before {
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image:
+    linear-gradient(0deg, transparent 24%, rgba(34, 211, 238, 0.04) 25%, rgba(34, 211, 238, 0.04) 26%, transparent 27%, transparent 74%, rgba(34, 211, 238, 0.04) 75%, rgba(34, 211, 238, 0.04) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(34, 211, 238, 0.04) 25%, rgba(34, 211, 238, 0.04) 26%, transparent 27%, transparent 74%, rgba(34, 211, 238, 0.04) 75%, rgba(34, 211, 238, 0.04) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+
+.postjob-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 680px;
+  padding: 2rem 2rem 5rem;
+  animation: fade-in-up 0.7s ease-out;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.postjob-header {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+}
+
+.postjob-header h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: #f1f5f9;
+  margin-bottom: 0.3rem;
+}
+
+.postjob-header h2 span {
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.postjob-header p {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   CARD
+   ============================================ */
+
+.postjob-card {
+  background: linear-gradient(135deg, rgba(8, 10, 25, 0.85) 0%, rgba(6, 50, 60, 0.45) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.postjob-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+  animation: scan-line 3s ease-in-out infinite;
+}
+
+@keyframes scan-line {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+/* ============================================
+   TIPS ROW
+   ============================================ */
+
+.postjob-tips {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.tip-item {
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: #94a3b8;
+  padding: 0.3rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.tip-item:hover {
+  background: rgba(34, 211, 238, 0.14);
+  color: #22d3ee;
+  border-color: rgba(34, 211, 238, 0.4);
+}
+
+/* ============================================
+   TEXTAREA
+   ============================================ */
+
+.postjob-textarea {
+  width: 100%;
+  padding: 1rem 1.1rem;
+  background: rgba(5, 8, 18, 0.7);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 0.75rem;
+  color: #e0e7ff;
+  font-size: 0.92rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7;
+  resize: vertical;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  min-height: 220px;
+}
+
+.postjob-textarea::placeholder {
+  color: #334155;
+}
+
+.postjob-textarea:focus {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.12);
+  background: rgba(5, 8, 18, 0.9);
+}
+
+.postjob-textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   CHAR COUNT
+   ============================================ */
+
+.postjob-char-count {
+  text-align: right;
+  color: #334155;
+  font-size: 0.75rem;
+  margin-top: 0.4rem;
+  margin-bottom: 1.25rem;
+  transition: color 0.3s ease;
+}
+
+/* ============================================
+   ACTIONS
+   ============================================ */
+
+.postjob-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.postjob-submit-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  color: #0f172a;
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.25);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.postjob-submit-btn:hover:not(:disabled) {
+  box-shadow: 0 0 40px rgba(34, 211, 238, 0.5);
+  transform: translateY(-2px);
+}
+
+.postjob-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.postjob-btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(15, 23, 42, 0.3);
+  border-top-color: #0f172a;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.postjob-cancel-btn {
+  padding: 0.85rem 1.75rem;
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.postjob-cancel-btn:hover:not(:disabled) {
+  background: rgba(148, 163, 184, 0.08);
+  border-color: rgba(148, 163, 184, 0.5);
+  color: #e0e7ff;
+}
+
+.postjob-cancel-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .postjob-container {
+    padding: 1.5rem 1rem 5rem;
+    padding-top: 4.5rem;
+  }
+
+  .postjob-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .postjob-container {
+    padding: 1rem 0.75rem 5rem;
+    padding-top: 4.5rem;
+  }
+
+  .postjob-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .postjob-actions {
+    flex-direction: column;
+  }
+
+  .postjob-cancel-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .postjob-header h2 {
+    font-size: 1.3rem;
+  }
+}

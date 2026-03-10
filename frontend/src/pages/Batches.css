@@ -1,0 +1,292 @@
+/* ============================================
+   BATCHES PAGE - DARK TECH AESTHETIC
+   Matches Welcome.css & Auth.css theme
+   ============================================ */
+
+.batches-page {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #050812 0%, #0a0e1f 50%, #050812 100%);
+  color: #e0e7ff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.batches-page::before {
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image:
+    linear-gradient(0deg, transparent 24%, rgba(34, 211, 238, 0.04) 25%, rgba(34, 211, 238, 0.04) 26%, transparent 27%, transparent 74%, rgba(34, 211, 238, 0.04) 75%, rgba(34, 211, 238, 0.04) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(34, 211, 238, 0.04) 25%, rgba(34, 211, 238, 0.04) 26%, transparent 27%, transparent 74%, rgba(34, 211, 238, 0.04) 75%, rgba(34, 211, 238, 0.04) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+
+.batches-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 2rem 5rem;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.batches-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+  animation: fade-in-up 0.6s ease-out;
+}
+
+.batches-header h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: #f1f5f9;
+  margin-bottom: 0.3rem;
+}
+
+.batches-header h2 span {
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.batches-header p {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   GRID
+   ============================================ */
+
+.batches-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  animation: fade-in-up 0.8s ease-out;
+}
+
+/* ============================================
+   BATCH CARD
+   ============================================ */
+
+.batch-card {
+  background: linear-gradient(135deg, rgba(8, 10, 25, 0.85) 0%, rgba(6, 50, 60, 0.4) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 1rem;
+  padding: 2rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  animation: fade-in-up 0.6s ease-out both;
+}
+
+.batch-card:nth-child(1) { animation-delay: 0.05s; }
+.batch-card:nth-child(2) { animation-delay: 0.10s; }
+.batch-card:nth-child(3) { animation-delay: 0.15s; }
+.batch-card:nth-child(4) { animation-delay: 0.20s; }
+.batch-card:nth-child(5) { animation-delay: 0.25s; }
+.batch-card:nth-child(6) { animation-delay: 0.30s; }
+.batch-card:nth-child(7) { animation-delay: 0.35s; }
+.batch-card:nth-child(8) { animation-delay: 0.40s; }
+
+.batch-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.07) 50%, transparent 100%);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.batch-card:hover::before {
+  left: 100%;
+}
+
+.batch-card:hover {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 35px rgba(34, 211, 238, 0.2), inset 0 0 30px rgba(34, 211, 238, 0.05);
+  transform: translateY(-6px);
+}
+
+/* ============================================
+   CARD CONTENT
+   ============================================ */
+
+.admission-year-label {
+  font-size: 0.7rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.admission-year-value {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+
+.batch-card-arrow {
+  display: inline-block;
+  color: rgba(34, 211, 238, 0.4);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 0.25rem;
+}
+
+.batch-card:hover .batch-card-arrow {
+  color: #22d3ee;
+  transform: translateX(4px);
+}
+
+/* Glow border animation */
+.batch-card-glow {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 1rem;
+  border: 1px solid rgba(34, 211, 238, 0);
+  animation: glow-border 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.batch-card:nth-child(odd) .batch-card-glow {
+  animation-delay: 1.5s;
+}
+
+@keyframes glow-border {
+  0%, 100% { border-color: rgba(34, 211, 238, 0); box-shadow: none; }
+  50%       { border-color: rgba(34, 211, 238, 0.3); box-shadow: 0 0 20px rgba(34, 211, 238, 0.1); }
+}
+
+/* ============================================
+   LOADING & EMPTY STATES
+   ============================================ */
+
+.batches-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  gap: 1.5rem;
+}
+
+.batches-loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(34, 211, 238, 0.1);
+  border-top-color: #22d3ee;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.batches-loading p,
+.batches-empty p {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.batches-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  gap: 1rem;
+  text-align: center;
+}
+
+.batches-empty-icon {
+  font-size: 3rem;
+}
+
+.batches-empty h3 {
+  color: #f1f5f9;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 900px) {
+  .batches-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .batches-container {
+    padding: 1.5rem 1rem 5rem;
+    padding-top: 4.5rem;
+  }
+
+  .batches-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .batches-container {
+    padding: 1rem 0.75rem 5rem;
+    padding-top: 4.5rem;
+  }
+
+  .batches-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  .batch-card {
+    min-height: 110px;
+    padding: 1.5rem 0.75rem;
+  }
+
+  .admission-year-value {
+    font-size: 1.75rem;
+  }
+}
