@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Welcome.css";
 
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+
 export default function Welcome() {
   const [stats, setStats] = useState({ totalAlumni: 0, totalJobs: 0 });
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/public/stats");
+        const response = await fetch(`${BASE_URL}/public/stats`);
         const data = await response.json();
         setStats({
           totalAlumni: data.totalAlumni || 0,
@@ -61,12 +63,8 @@ export default function Welcome() {
             <h1>Alumni Network</h1>
           </div>
           <div className="navbar-links">
-            <Link to="/login" className="nav-btn login-btn">
-              Login
-            </Link>
-            <Link to="/signup" className="nav-btn signup-btn">
-              Sign Up
-            </Link>
+            <Link to="/login" className="nav-btn login-btn">Login</Link>
+            <Link to="/signup" className="nav-btn signup-btn">Sign Up</Link>
           </div>
         </div>
       </nav>
@@ -91,12 +89,8 @@ export default function Welcome() {
           </div>
 
           <div className="hero-cta">
-            <Link to="/signup" className="cta-btn primary-btn">
-              Get Started Free
-            </Link>
-            <Link to="/login" className="cta-btn secondary-btn">
-              Already a Member?
-            </Link>
+            <Link to="/signup" className="cta-btn primary-btn">Get Started Free</Link>
+            <Link to="/login" className="cta-btn secondary-btn">Already a Member?</Link>
           </div>
         </div>
       </section>
@@ -104,7 +98,6 @@ export default function Welcome() {
       {/* COUNTER SECTION */}
       <section className="counter-section">
         <h2 className="section-title">Our Impact</h2>
-
         <div className="counter-grid">
           <div className="counter-card">
             <div className="counter-icon">👥</div>
@@ -129,38 +122,32 @@ export default function Welcome() {
       {/* FEATURES SECTION */}
       <section className="features-section">
         <h2 className="section-title">What We Provide</h2>
-
         <div className="features-grid">
           <div className="feature-card">
             <div className="feature-icon">🌐</div>
             <h3>Global Network</h3>
             <p>Connect with alumni across all batches, branches, and specializations worldwide.</p>
           </div>
-
           <div className="feature-card">
             <div className="feature-icon">💼</div>
             <h3>Job Opportunities</h3>
             <p>Access exclusive job postings, internships, and referrals from trusted companies.</p>
           </div>
-
           <div className="feature-card">
             <div className="feature-icon">🤝</div>
             <h3>Mentorship</h3>
             <p>Get guidance from experienced alumni and mentor the next generation of professionals.</p>
           </div>
-
           <div className="feature-card">
             <div className="feature-icon">📊</div>
             <h3>Industry Insights</h3>
             <p>Share knowledge, discuss trends, and stay updated with the latest industry developments.</p>
           </div>
-
           <div className="feature-card">
             <div className="feature-icon">🎯</div>
             <h3>Career Growth</h3>
             <p>Accelerate your career with connections, collaborations, and opportunities.</p>
           </div>
-
           <div className="feature-card">
             <div className="feature-icon">🔐</div>
             <h3>Secure & Private</h3>
@@ -176,13 +163,11 @@ export default function Welcome() {
             <h3>Alumni Network</h3>
             <p>Building connections. Creating opportunities.</p>
           </div>
-
           <div className="footer-links">
             <h4>Quick Links</h4>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
           </div>
-
           <div className="footer-socials">
             <h4>Follow Us</h4>
             <div className="social-links">
@@ -192,7 +177,6 @@ export default function Welcome() {
             </div>
           </div>
         </div>
-
         <div className="footer-bottom">
           <p>&copy; 2024 Alumni Network. All rights reserved.</p>
         </div>
