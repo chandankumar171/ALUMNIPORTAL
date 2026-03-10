@@ -9,7 +9,8 @@ connectDB();
 const app = express();
 app.use(cors({
   origin: [
-    "http://localhost:5173",           // local dev
+    "http://localhost:5173",
+    "http://localhost:3000",           // local dev
     process.env.FRONTEND_URL           // Vercel URL — set this in Render env vars
   ],
   credentials: true
