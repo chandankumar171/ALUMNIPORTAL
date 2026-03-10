@@ -7,7 +7,13 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",           // local dev
+    process.env.FRONTEND_URL           // Vercel URL — set this in Render env vars
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 app.use("/api/auth", require("./routes/authRoutes"));
