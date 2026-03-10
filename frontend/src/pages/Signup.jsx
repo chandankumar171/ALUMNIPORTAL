@@ -108,7 +108,7 @@ export default function Signup({ onSignup }) {
               <input name="name" placeholder="Full Name" value={form.name} onChange={handleChange} required disabled={loading} />
               <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required disabled={loading} />
               <input name="rollNo" placeholder="Roll Number" value={form.rollNo} onChange={handleChange} required disabled={loading} />
-              <input name="regNo" placeholder="Registration Number" value={form.regNo} onChange={handleChange} required disabled={loading} />
+              <input name="regNo" placeholder="Registration Number" value={form.regNo} onChange={handleChange}  disabled={loading} />
 
               <select name="branch" value={form.branch} onChange={handleChange} required disabled={loading}>
                 <option value="">Select Branch</option>
