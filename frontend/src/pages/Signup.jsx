@@ -3,23 +3,53 @@ import { Link, useNavigate } from "react-router-dom";
 import API from "../services/api";
 import "./Auth.css";
 
+const CURRENT_YEAR = new Date().getFullYear();
+const MIN_YEAR = 1980;
+
 export default function Signup({ onSignup }) {
   const navigate = useNavigate();
 
   const [isAdminSignup, setIsAdminSignup] = useState(false);
   const [adminKey, setAdminKey]           = useState("");
   const [loading, setLoading]             = useState(false);
+  const [batchError, setBatchError]       = useState("");
 
   const [form, setForm] = useState({
     name: "", email: "", rollNo: "", regNo: "",
     branch: "", batchFrom: "", batchTo: "", password: "",
   });
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    // Clear batch error when user edits batch fields
+    if (e.target.name === "batchFrom" || e.target.name === "batchTo") {
+      setBatchError("");
+    }
+  };
+
+  const validateBatchYears = () => {
+    const from = parseInt(form.batchFrom);
+    const to   = parseInt(form.batchTo);
+
+    if (isNaN(from) || from < MIN_YEAR || from > CURRENT_YEAR + 1) {
+      return `Batch From must be a valid year between ${MIN_YEAR} and ${CURRENT_YEAR + 1}`;
+    }
+    if (isNaN(to) || to < MIN_YEAR || to > CURRENT_YEAR + 6) {
+      return `Batch To must be a valid year between ${MIN_YEAR} and ${CURRENT_YEAR + 6}`;
+    }
+    if (to < from) {
+      return "Batch To must be after Batch From";
+    }
+    if (to - from > 6) {
+      return "Batch duration cannot exceed 6 years";
+    }
+    return null; // no error
+  };
 
   const submit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setBatchError("");
 
     try {
       let payload;
@@ -37,6 +67,14 @@ export default function Signup({ onSignup }) {
           setLoading(false);
           return;
         }
+
+        const batchValidationError = validateBatchYears();
+        if (batchValidationError) {
+          setBatchError(batchValidationError);
+          setLoading(false);
+          return;
+        }
+
         payload = form;
       }
 
@@ -108,7 +146,7 @@ export default function Signup({ onSignup }) {
               <input name="name" placeholder="Full Name" value={form.name} onChange={handleChange} required disabled={loading} />
               <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required disabled={loading} />
               <input name="rollNo" placeholder="Roll Number" value={form.rollNo} onChange={handleChange} required disabled={loading} />
-              <input name="regNo" placeholder="Registration Number" value={form.regNo} onChange={handleChange}  disabled={loading} />
+              <input name="regNo" placeholder="Registration Number (optional)" value={form.regNo} onChange={handleChange} disabled={loading} />
 
               <select name="branch" value={form.branch} onChange={handleChange} required disabled={loading}>
                 <option value="">Select Branch</option>
@@ -121,11 +159,34 @@ export default function Signup({ onSignup }) {
               </select>
 
               <div className="batch-row">
-                <input type="number" name="batchFrom" placeholder="Batch From (e.g. 2021)"
-                  value={form.batchFrom} onChange={handleChange} required disabled={loading} />
-                <input type="number" name="batchTo" placeholder="Batch To (e.g. 2025)"
-                  value={form.batchTo} onChange={handleChange} required disabled={loading} />
+                <input
+                  type="number"
+                  name="batchFrom"
+                  placeholder={`From (e.g. ${CURRENT_YEAR - 2})`}
+                  value={form.batchFrom}
+                  onChange={handleChange}
+                  required
+                  disabled={loading}
+                  min={MIN_YEAR}
+                  max={CURRENT_YEAR + 1}
+                />
+                <input
+                  type="number"
+                  name="batchTo"
+                  placeholder={`To (e.g. ${CURRENT_YEAR + 1})`}
+                  value={form.batchTo}
+                  onChange={handleChange}
+                  required
+                  disabled={loading}
+                  min={MIN_YEAR}
+                  max={CURRENT_YEAR + 6}
+                />
               </div>
+
+              {/* Batch year error message */}
+              {batchError && (
+                <p className="batch-error-msg">⚠️ {batchError}</p>
+              )}
 
               <input type="password" name="password" placeholder="Create Password"
                 value={form.password} onChange={handleChange} required disabled={loading} />
