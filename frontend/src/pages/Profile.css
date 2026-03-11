@@ -510,3 +510,80 @@
     justify-content: center;
   }
 }
+/* ============================================
+   BASIC INFO EDIT FORM (inside header card)
+   ============================================ */
+
+.basic-edit-form {
+  flex: 1;
+  min-width: 200px;
+}
+
+.basic-edit-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #22d3ee;
+  margin: 0 0 0.85rem 0;
+}
+
+.basic-input {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  margin: 0.35rem 0;
+  background: rgba(5, 8, 18, 0.7);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 0.5rem;
+  color: #e0e7ff;
+  font-size: 0.85rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.basic-input::placeholder { color: #475569; }
+
+.basic-input:focus {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.15);
+  background: rgba(5, 8, 18, 0.9);
+}
+
+.basic-batch-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.basic-batch-row .basic-input {
+  flex: 1;
+}
+
+/* Edit Info button (pencil icon button in header) */
+.edit-basic-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding: 0.45rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  border-radius: 0.5rem;
+  color: #22d3ee;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.edit-basic-btn:hover {
+  background: rgba(34, 211, 238, 0.1);
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.2);
+}
+
+@media (max-width: 480px) {
+  .basic-batch-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}

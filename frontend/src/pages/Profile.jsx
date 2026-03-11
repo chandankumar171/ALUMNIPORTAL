@@ -5,15 +5,10 @@ import { AuthContext } from "../context/AuthContext";
 import API from "../services/api";
 import PostCard from "../components/PostCard";
 import "./Profile.css";
-import { FaLinkedin, FaGithub, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaInstagram, FaWhatsapp, FaPen } from "react-icons/fa";
 
-// Accepts any format:
-//   "9876543210"      → wa.me/919876543210  (10 digits, auto-adds 91)
-//   "+91 9876543210"  → wa.me/919876543210  (strips + and space)
-//   "919876543210"    → wa.me/919876543210  (already has country code)
 const buildWhatsAppUrl = (raw) => {
   const digits = String(raw).replace(/[^\d]/g, "");
-  // If user entered just 10-digit Indian number, prepend 91
   const number = digits.length === 10 ? `91${digits}` : digits;
   return `https://wa.me/${number}`;
 };
@@ -23,8 +18,10 @@ export default function Profile() {
   const { user: loggedInUser } = useContext(AuthContext);
 
   const [user, setUser]               = useState(null);
-  const [isEditing, setIsEditing]     = useState(false);
+  const [isEditing, setIsEditing]     = useState(false);       // professional profile edit
+  const [isEditingBasic, setIsEditingBasic] = useState(false); // basic info edit
   const [editData, setEditData]       = useState({});
+  const [basicData, setBasicData]     = useState({});          // basic info form data
   const [skillsInput, setSkillsInput] = useState("");
   const [error, setError]             = useState(null);
   const [loading, setLoading]         = useState(true);
@@ -40,6 +37,15 @@ export default function Profile() {
       .then(res => {
         setUser(res.data);
         setEditData(res.data.profile || {});
+        setBasicData({
+          name:      res.data.name      || "",
+          email:     res.data.email     || "",
+          rollNo:    res.data.rollNo    || "",
+          regNo:     res.data.regNo     || "",
+          branch:    res.data.branch    || "",
+          batchFrom: res.data.batchFrom || "",
+          batchTo:   res.data.batchTo   || "",
+        });
         setSkillsInput((res.data.profile?.skills || []).join(", "));
         setError(null);
         setLoading(false);
@@ -64,6 +70,7 @@ export default function Profile() {
     }
   };
 
+  // Save professional profile
   const handleSaveProfile = async () => {
     try {
       const dataToSave = {
@@ -78,6 +85,43 @@ export default function Profile() {
       alert("Profile updated successfully!");
     } catch (err) {
       alert("Error updating profile");
+    }
+  };
+
+  // Save basic info
+  const handleSaveBasicInfo = async () => {
+    try {
+      if (!basicData.name.trim()) {
+        alert("Name cannot be empty");
+        return;
+      }
+      if (!basicData.email.trim()) {
+        alert("Email cannot be empty");
+        return;
+      }
+      if (!basicData.branch) {
+        alert("Please select a branch");
+        return;
+      }
+      if (!basicData.batchFrom || !basicData.batchTo) {
+        alert("Please enter batch years");
+        return;
+      }
+      const res = await API.put("/users/basic-info", basicData);
+      setUser(res.data);
+      setBasicData({
+        name:      res.data.name      || "",
+        email:     res.data.email     || "",
+        rollNo:    res.data.rollNo    || "",
+        regNo:     res.data.regNo     || "",
+        branch:    res.data.branch    || "",
+        batchFrom: res.data.batchFrom || "",
+        batchTo:   res.data.batchTo   || "",
+      });
+      setIsEditingBasic(false);
+      alert("Basic info updated successfully!");
+    } catch (err) {
+      alert(err.response?.data?.message || "Error updating basic info");
     }
   };
 
@@ -123,14 +167,101 @@ export default function Profile() {
           <div className="profile-avatar-large">
             {user.name?.charAt(0).toUpperCase()}
           </div>
-          <div className="user-info">
-            <h1>{user.name}</h1>
-            <div className="user-info-row"><strong>Email</strong>{user.email}</div>
-            <div className="user-info-row"><strong>Roll No</strong>{user.rollNo}</div>
-            <div className="user-info-row"><strong>Reg No</strong>{user.regNo}</div>
-            <div className="user-info-row"><strong>Branch</strong>{user.branch}</div>
-            <div className="user-info-row"><strong>Batch</strong>{user.batchFrom}–{user.batchTo}</div>
-          </div>
+
+          {!isEditingBasic ? (
+            /* VIEW MODE — basic info */
+            <div className="user-info">
+              <h1>{user.name}</h1>
+              <div className="user-info-row"><strong>Email</strong>{user.email}</div>
+              <div className="user-info-row"><strong>Roll No</strong>{user.rollNo}</div>
+              {user.regNo && <div className="user-info-row"><strong>Reg No</strong>{user.regNo}</div>}
+              <div className="user-info-row"><strong>Branch</strong>{user.branch}</div>
+              <div className="user-info-row"><strong>Batch</strong>{user.batchFrom}–{user.batchTo}</div>
+
+              {isOwnProfile && (
+                <button
+                  className="edit-basic-btn"
+                  onClick={() => setIsEditingBasic(true)}
+                  title="Edit basic info"
+                >
+                  <FaPen /> Edit Info
+                </button>
+              )}
+            </div>
+          ) : (
+            /* EDIT MODE — basic info */
+            <div className="user-info basic-edit-form">
+              <h3 className="basic-edit-title">Edit Basic Info</h3>
+
+              <input
+                className="basic-input"
+                placeholder="Full Name"
+                value={basicData.name}
+                onChange={e => setBasicData({ ...basicData, name: e.target.value })}
+              />
+              <input
+                className="basic-input"
+                type="email"
+                placeholder="Email"
+                value={basicData.email}
+                onChange={e => setBasicData({ ...basicData, email: e.target.value })}
+              />
+              <input
+                className="basic-input"
+                placeholder="Roll Number"
+                value={basicData.rollNo}
+                onChange={e => setBasicData({ ...basicData, rollNo: e.target.value })}
+              />
+              <input
+                className="basic-input"
+                placeholder="Registration Number (optional)"
+                value={basicData.regNo}
+                onChange={e => setBasicData({ ...basicData, regNo: e.target.value })}
+              />
+              <select
+                className="basic-input"
+                value={basicData.branch}
+                onChange={e => setBasicData({ ...basicData, branch: e.target.value })}
+              >
+                <option value="">Select Branch</option>
+                <option value="MCA">MCA</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="ME">ME</option>
+                <option value="CE">CE</option>
+              </select>
+              <div className="basic-batch-row">
+                <input
+                  className="basic-input"
+                  type="number"
+                  placeholder="Batch From (e.g. 2021)"
+                  value={basicData.batchFrom}
+                  onChange={e => setBasicData({ ...basicData, batchFrom: e.target.value })}
+                />
+                <input
+                  className="basic-input"
+                  type="number"
+                  placeholder="Batch To (e.g. 2025)"
+                  value={basicData.batchTo}
+                  onChange={e => setBasicData({ ...basicData, batchTo: e.target.value })}
+                />
+              </div>
+
+              <div className="button-group">
+                <button className="save-btn" onClick={handleSaveBasicInfo}>Save</button>
+                <button className="cancel-btn" onClick={() => {
+                  setIsEditingBasic(false);
+                  setBasicData({
+                    name: user.name || "", email: user.email || "",
+                    rollNo: user.rollNo || "", regNo: user.regNo || "",
+                    branch: user.branch || "",
+                    batchFrom: user.batchFrom || "", batchTo: user.batchTo || "",
+                  });
+                }}>Cancel</button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* ── PROFESSIONAL PROFILE ────────────────────────────────────── */}
@@ -145,14 +276,12 @@ export default function Profile() {
                   {profile.jobRole}{profile.company && ` @ ${profile.company}`}
                 </div>
               )}
-
               {profile?.about && (
                 <div className="profile-field">
                   <strong>About</strong>
                   {profile.about}
                 </div>
               )}
-
               {profile?.skills?.length > 0 && (
                 <div className="profile-field" style={{ flexDirection: "column", alignItems: "flex-start" }}>
                   <strong>Skills</strong>
@@ -164,7 +293,6 @@ export default function Profile() {
                 </div>
               )}
 
-              {/* Social Icons */}
               {(profile?.linkedin || profile?.github || profile?.instagram || profile?.whatsapp) && (
                 <div className="social-icons">
                   {profile?.linkedin && (
@@ -183,12 +311,7 @@ export default function Profile() {
                     </a>
                   )}
                   {profile?.whatsapp && (
-                    <a
-                      href={buildWhatsAppUrl(profile.whatsapp)}
-                      target="_blank"
-                      rel="noreferrer"
-                      title="WhatsApp"
-                    >
+                    <a href={buildWhatsAppUrl(profile.whatsapp)} target="_blank" rel="noreferrer" title="WhatsApp">
                       <FaWhatsapp />
                     </a>
                   )}
@@ -205,59 +328,24 @@ export default function Profile() {
               )}
             </>
           ) : (
-            <>
-              {/* EDIT MODE */}
-              <div className="edit-form">
-                <input
-                  placeholder="LinkedIn URL"
-                  value={editData.linkedin || ""}
-                  onChange={e => setEditData({ ...editData, linkedin: e.target.value })}
-                />
-                <input
-                  placeholder="GitHub URL"
-                  value={editData.github || ""}
-                  onChange={e => setEditData({ ...editData, github: e.target.value })}
-                />
-                <input
-                  placeholder="Instagram URL"
-                  value={editData.instagram || ""}
-                  onChange={e => setEditData({ ...editData, instagram: e.target.value })}
-                />
-                <input
-                  placeholder="WhatsApp number (e.g. 9876543210)"
-                  value={editData.whatsapp || ""}
-                  onChange={e => setEditData({ ...editData, whatsapp: e.target.value })}
-                />
-                <input
-                  placeholder="Job Role"
-                  value={editData.jobRole || ""}
-                  onChange={e => setEditData({ ...editData, jobRole: e.target.value })}
-                />
-                <input
-                  placeholder="Company"
-                  value={editData.company || ""}
-                  onChange={e => setEditData({ ...editData, company: e.target.value })}
-                />
-                <textarea
-                  placeholder="About"
-                  value={editData.about || ""}
-                  onChange={e => setEditData({ ...editData, about: e.target.value })}
-                />
-                <input
-                  placeholder="Skills (comma separated, e.g. JavaScript, React, Node.js)"
-                  value={skillsInput}
-                  onChange={e => setSkillsInput(e.target.value)}
-                />
-                <div className="button-group">
-                  <button className="save-btn" onClick={handleSaveProfile}>Save Changes</button>
-                  <button className="cancel-btn" onClick={() => {
-                    setIsEditing(false);
-                    setEditData(user.profile || {});
-                    setSkillsInput((user.profile?.skills || []).join(", "));
-                  }}>Cancel</button>
-                </div>
+            <div className="edit-form">
+              <input placeholder="LinkedIn URL"     value={editData.linkedin  || ""} onChange={e => setEditData({ ...editData, linkedin:  e.target.value })} />
+              <input placeholder="GitHub URL"       value={editData.github    || ""} onChange={e => setEditData({ ...editData, github:    e.target.value })} />
+              <input placeholder="Instagram URL"    value={editData.instagram || ""} onChange={e => setEditData({ ...editData, instagram: e.target.value })} />
+              <input placeholder="WhatsApp number (e.g. 9876543210)" value={editData.whatsapp || ""} onChange={e => setEditData({ ...editData, whatsapp: e.target.value })} />
+              <input placeholder="Job Role"         value={editData.jobRole   || ""} onChange={e => setEditData({ ...editData, jobRole:   e.target.value })} />
+              <input placeholder="Company"          value={editData.company   || ""} onChange={e => setEditData({ ...editData, company:   e.target.value })} />
+              <textarea placeholder="About"         value={editData.about     || ""} onChange={e => setEditData({ ...editData, about:     e.target.value })} />
+              <input placeholder="Skills (comma separated, e.g. JavaScript, React, Node.js)" value={skillsInput} onChange={e => setSkillsInput(e.target.value)} />
+              <div className="button-group">
+                <button className="save-btn" onClick={handleSaveProfile}>Save Changes</button>
+                <button className="cancel-btn" onClick={() => {
+                  setIsEditing(false);
+                  setEditData(user.profile || {});
+                  setSkillsInput((user.profile?.skills || []).join(", "));
+                }}>Cancel</button>
               </div>
-            </>
+            </div>
           )}
         </div>
 
