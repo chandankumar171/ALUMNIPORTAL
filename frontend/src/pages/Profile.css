@@ -11,6 +11,9 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  scroll-behavior: smooth;
 }
 
 .profile-page::before {
@@ -37,7 +40,7 @@
   z-index: 1;
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem 2rem 5rem;
+  padding: 5rem 2rem 5rem;
   animation: fade-in-up 0.7s ease-out;
 }
 
@@ -430,7 +433,7 @@
 
 @media (max-width: 768px) {
   .profile-container {
-    padding: 1.5rem 1rem 5rem;
+    padding: 1.5rem 1rem 6rem;
     padding-top: 4.5rem;
   }
 
@@ -457,7 +460,7 @@
 
 @media (max-width: 480px) {
   .profile-container {
-    padding: 1rem 0.75rem 5rem;
+    padding: 1rem 0.75rem 7rem;
     padding-top: 4.5rem;
   }
 
@@ -465,23 +468,58 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 1.25rem 1rem;
+    padding: 1.5rem 1rem;
+    gap: 1rem;
   }
 
   .profile-avatar-large {
-    width: 70px;
-    height: 70px;
+    width: 72px;
+    height: 72px;
     font-size: 1.75rem;
   }
 
-  .user-info h1 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
+  .user-info {
+    width: 100%;
+    min-width: unset;
   }
 
+  .user-info h1 {
+    font-size: 1.2rem;
+    margin-bottom: 0.85rem;
+    text-align: center;
+  }
+
+  /* Clean label/value table layout on mobile */
   .user-info-row {
-    justify-content: center;
-    font-size: 0.82rem;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.45rem 0;
+    font-size: 0.83rem;
+    text-align: left;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(34, 211, 238, 0.06);
+  }
+
+  .user-info-row:last-of-type {
+    border-bottom: none;
+  }
+
+  .user-info-row strong {
+    color: #22d3ee;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-align: right;
+    padding-right: 0.5rem;
+    min-width: unset;
+  }
+
+  .user-info-row span,
+  .user-info-row > *:last-child {
+    color: #cbd5e1;
+    word-break: break-word;
+    text-align: left;
   }
 
   .social-icons {
@@ -508,6 +546,12 @@
 
   .skills-list {
     justify-content: center;
+  }
+
+  .edit-basic-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.85rem;
   }
 }
 /* ============================================

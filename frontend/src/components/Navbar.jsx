@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaSignOutAlt, FaHome, FaCodeBranch, FaFileAlt, FaUser, FaShieldAlt } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import logo from "../assets/logo.png";
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -27,12 +28,11 @@ export default function Navbar() {
       {/* ── DESKTOP NAVBAR ── */}
       <nav className="desktop-nav">
         <Link to="/" className="nav-brand">
-          <span className="nav-brand-icon">⚡</span>
+          <img src={logo} alt="GITA Alumni Portal" className="nav-logo" />
           <h2>Alumni Network</h2>
         </Link>
 
         <div className="nav-right">
-          {/* Regular user links */}
           {!user?.isAdmin && (
             <>
               <Link to="/"         className={`nav-link ${isActive("/") ? "active" : ""}`}>Home</Link>
@@ -41,7 +41,6 @@ export default function Navbar() {
             </>
           )}
 
-          {/* Admin link */}
           {user?.isAdmin && (
             <Link to="/admin" className={`nav-link admin-link ${isActive("/admin") ? "active" : ""}`}>
               <FaShieldAlt /> Admin Panel
@@ -90,13 +89,12 @@ export default function Navbar() {
       {/* ── MOBILE NAVBAR ── */}
       <div className="mobile-nav-wrapper">
         <div className="mobile-top-bar">
-          <span className="mobile-top-bar-icon">⚡</span>
+          <img src={logo} alt="GITA Alumni Portal" className="mobile-nav-logo" />
           <h2>Alumni Network</h2>
         </div>
 
         <nav className="mobile-bottom-nav">
           {user?.isAdmin ? (
-            /* Admin mobile nav */
             <>
               <Link to="/admin" className={`mobile-nav-item ${isActive("/admin") ? "active" : ""}`}>
                 <FaShieldAlt /><span>Admin</span>
@@ -106,7 +104,6 @@ export default function Navbar() {
               </button>
             </>
           ) : (
-            /* Regular user mobile nav */
             <>
               <Link to="/" className={`mobile-nav-item ${isActive("/") ? "active" : ""}`}>
                 <FaHome /><span>Home</span>

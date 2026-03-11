@@ -37,7 +37,7 @@
   z-index: 1;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem 2rem 5rem;
+  padding: 5rem 2rem 5rem;
 }
 
 /* ============================================
@@ -218,7 +218,7 @@
 
 @media (max-width: 768px) {
   .branches-container {
-    padding: 1.5rem 1rem 5rem;
+    padding: 1.5rem 1rem 6rem;
     padding-top: 4.5rem;
   }
 
@@ -230,7 +230,7 @@
 
 @media (max-width: 480px) {
   .branches-container {
-    padding: 1rem 0.75rem 5rem;
+    padding: 1rem 0.75rem 7rem;
     padding-top: 4.5rem;
   }
 

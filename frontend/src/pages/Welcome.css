@@ -813,3 +813,23 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================
+   logo update
+   ============================================ */
+   .welcome-nav-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.4));
+}
+
+.footer-logo {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.3));
+}

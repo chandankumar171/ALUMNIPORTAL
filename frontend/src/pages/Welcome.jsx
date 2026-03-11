@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 import "./Welcome.css";
 
 const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
@@ -20,7 +21,6 @@ export default function Welcome() {
         console.error("Error fetching stats:", error);
       }
     };
-
     fetchStats();
   }, []);
 
@@ -32,22 +32,15 @@ export default function Welcome() {
       let currentAlumni = 0;
       const interval = setInterval(() => {
         currentAlumni += Math.ceil(stats.totalAlumni / 50);
-        if (currentAlumni >= stats.totalAlumni) {
-          currentAlumni = stats.totalAlumni;
-          clearInterval(interval);
-        }
+        if (currentAlumni >= stats.totalAlumni) { currentAlumni = stats.totalAlumni; clearInterval(interval); }
         setDisplayAlumni(currentAlumni);
       }, 30);
     }
-
     if (stats.totalJobs > 0) {
       let currentJobs = 0;
       const interval = setInterval(() => {
         currentJobs += Math.ceil(stats.totalJobs / 50);
-        if (currentJobs >= stats.totalJobs) {
-          currentJobs = stats.totalJobs;
-          clearInterval(interval);
-        }
+        if (currentJobs >= stats.totalJobs) { currentJobs = stats.totalJobs; clearInterval(interval); }
         setDisplayJobs(currentJobs);
       }, 30);
     }
@@ -59,7 +52,7 @@ export default function Welcome() {
       <nav className="welcome-navbar">
         <div className="navbar-container">
           <div className="navbar-brand">
-            <span className="brand-icon">⚡</span>
+            <img src={logo} alt="GITA Alumni Portal" className="welcome-nav-logo" />
             <h1>Alumni Network</h1>
           </div>
           <div className="navbar-links">
@@ -87,7 +80,6 @@ export default function Welcome() {
               Join the most advanced alumni network platform designed for tech-forward professionals. Share opportunities, build connections, and accelerate your career.
             </p>
           </div>
-
           <div className="hero-cta">
             <Link to="/signup" className="cta-btn primary-btn">Get Started Free</Link>
             <Link to="/login" className="cta-btn secondary-btn">Already a Member?</Link>
@@ -107,7 +99,6 @@ export default function Welcome() {
             </div>
             <div className="counter-glow"></div>
           </div>
-
           <div className="counter-card">
             <div className="counter-icon">💼</div>
             <div className="counter-display">
@@ -126,7 +117,7 @@ export default function Welcome() {
           <div className="feature-card">
             <div className="feature-icon">🌐</div>
             <h3>Global Network</h3>
-            <p>Connect with alumni across all batches, branches, and specializations worldwide.</p>
+            <p>Connect with alumni of GITA Autonomous College across all batches, branches, and specializations.</p>
           </div>
           <div className="feature-card">
             <div className="feature-icon">💼</div>
@@ -160,6 +151,7 @@ export default function Welcome() {
       <footer className="welcome-footer">
         <div className="footer-content">
           <div className="footer-brand">
+            <img src={logo} alt="GITA Alumni Portal" className="footer-logo" />
             <h3>Alumni Network</h3>
             <p>Building connections. Creating opportunities.</p>
           </div>
