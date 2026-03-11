@@ -305,7 +305,7 @@
 
 @media (max-width: 768px) {
   .profiles-container {
-    padding: 1.5rem 1rem 5rem;
+    padding: 1.5rem 1rem 7rem;
     padding-top: 4.5rem;
   }
 
@@ -322,7 +322,7 @@
 
 @media (max-width: 480px) {
   .profiles-container {
-    padding: 1rem 0.75rem 5rem;
+    padding: 1rem 0.75rem 7rem;
     padding-top: 4.5rem;
   }
 

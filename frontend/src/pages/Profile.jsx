@@ -332,7 +332,7 @@ export default function Profile() {
               <input placeholder="LinkedIn URL"     value={editData.linkedin  || ""} onChange={e => setEditData({ ...editData, linkedin:  e.target.value })} />
               <input placeholder="GitHub URL"       value={editData.github    || ""} onChange={e => setEditData({ ...editData, github:    e.target.value })} />
               <input placeholder="Instagram URL"    value={editData.instagram || ""} onChange={e => setEditData({ ...editData, instagram: e.target.value })} />
-              <input placeholder="WhatsApp number (e.g. 9876543210)" value={editData.whatsapp || ""} onChange={e => setEditData({ ...editData, whatsapp: e.target.value })} />
+              <input placeholder="WhatsApp number (e.g. 6371458048)" value={editData.whatsapp || ""} onChange={e => setEditData({ ...editData, whatsapp: e.target.value })} />
               <input placeholder="Job Role"         value={editData.jobRole   || ""} onChange={e => setEditData({ ...editData, jobRole:   e.target.value })} />
               <input placeholder="Company"          value={editData.company   || ""} onChange={e => setEditData({ ...editData, company:   e.target.value })} />
               <textarea placeholder="About"         value={editData.about     || ""} onChange={e => setEditData({ ...editData, about:     e.target.value })} />
