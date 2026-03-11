@@ -4,8 +4,8 @@ const Post = require("../models/Post");
 // Get public statistics
 exports.getStats = async (req, res) => {
     try {
-        const totalAlumni = await User.countDocuments();
-        const totalJobs = await Post.countDocuments();
+        const totalAlumni = await User.countDocuments({ isAdmin: false });
+        const totalJobs   = await Post.countDocuments();
 
         res.json({
             totalAlumni,
